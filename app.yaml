@@ -1,0 +1,15 @@
+application: summer-storage
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: .*
+  script: main.py
+
+- url: /css
+  static_dir: root/css
+- url: /js
+  static_dir: root/js
+- url: /images
+  static_dir: root/images
