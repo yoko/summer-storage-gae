@@ -19,6 +19,7 @@ class SetHandler(webapp.RequestHandler):
     callback = self.request.get('callback')
     if callback:
       ret = callback+'('+ret+')'
+    self.response.headers['Content-Type'] = 'text/javascript'
     self.response.out.write(ret)
 
 
@@ -26,11 +27,12 @@ class GetHandler(webapp.RequestHandler):
   def get(self):
     key = self.request.get('key')
     ret = memcache.get(key)
-    ret = '"'+ret+'"' if ret else ''
+    ret = '"'+ret+'"' if ret else 'null'
 
     callback = self.request.get('callback')
     if callback:
       ret = callback+'('+ret+')'
+    self.response.headers['Content-Type'] = 'text/javascript'
     self.response.out.write(ret)
 
 
@@ -41,6 +43,7 @@ class DeleteHandler(webapp.RequestHandler):
     callback = self.request.get('callback')
     if callback:
       ret = callback+'('+ret+')'
+    self.response.headers['Content-Type'] = 'text/javascript'
     self.response.out.write(ret)
 
 
